@@ -3,11 +3,12 @@ import streamlit as st
 import numpy as np
 
 
+
 # url=''
 
 user_input = st.file_uploader(
     "Select a piece of artwork that you enjoy (png or jpg only)"
-    , type=['png','jpg']
+    , type=['png','jpg','jpeg']
     ,accept_multiple_files=False
     )
 
