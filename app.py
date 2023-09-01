@@ -2,8 +2,6 @@ import requests
 import streamlit as st
 import numpy as np
 
-
-
 # url=''
 
 user_input = st.file_uploader(
