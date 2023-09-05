@@ -59,4 +59,15 @@ add_bg_from_local('assets/img1.wallspic.com-sky-water-blue-azure-watercolorpaint
 
 
 st.subheader('What does artsy fartsci do?')
-             
+
+st.text(
+    '''
+    Artsy-fartsci is an app that allows you to find similar art to any 
+    image you choose to upload. We take your beloved images and run them 
+    through our pretrained model consisting of 10,000 images from the artsy 
+    API. Whether you are in the market for paintings or prints we ensure 
+    you are provided with five similar images.
+    '''
+)       
+
+st.image('assets/MAGIC-2-removebg-preview.png')

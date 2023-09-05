@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 from PIL import Image
-from io import BytesIO
+import io
 import base64
 
 # Set the page title and icon
@@ -25,35 +25,23 @@ def main():
     st.header("Upload your image here")
 
     # Upload a user image
-    uploaded_image = st.file_uploader("Upload an image", type=["jpg", "png", "jpeg"])
+    uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
 
-    # Check if an image was uploaded
-    if uploaded_image is not None:
-        # Display the user-uploaded image with a frame
-        user_image = Image.open(uploaded_image)
-        framed_user_image = add_frame(user_image)
-        st.image(framed_user_image, caption="Where we started our journey", use_column_width=True)
+    if uploaded_file:
+        st.image(uploaded_file, caption="Uploaded Image.", use_column_width=True)
 
-    # Display 5 images from an API
-    st.header("Here are five similar art pieces to explore")
-    api_url = "http://127.0.0.1:8000"  # WHAT IS THE FASTAPI ENDPOINT
-    response = requests.get(api_url)
+    # Send the image to FastAPI endpoint for flipping
+        fastapi_url = "http://localhost:8086/flip_image/"
+        files = {"image": uploaded_file}
+        response = requests.post(fastapi_url, files=files)
 
-# THIS RETURNS 5 IMAGES BUT I STILL KNOW FUCK ALL ABOUT API...  (UNCOMMENT IT)
-    if response.status_code == 200:
-        pass
-        # api_images = response.json()
-        # for i in api_imagereply:
-            # api_image = Image.open(BytesIO(requests.get(api_image_url).content))\
-            # st.image(api_image, caption=f'{image_title}', use_column_width=True)
-            # st.text(
-                
-            #     # enter the text from the API????
-                
-            # )
-        
-    else:
-        st.warning("Oops! Try again later.")
+        if response.status_code == 200:
+            response_data = response.json()
+            st.success(response_data["message"])
+        else:
+            st.error("An error occurred while processing the image.")
+            
+   
 
 def add_bg_from_local(image_file):
     with open(image_file, "rb") as image_file:
