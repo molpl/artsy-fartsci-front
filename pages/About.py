@@ -9,7 +9,7 @@ import base64
 
 # Set the page title and icon
 
-
+# st.image('assets/MAGIC-2-removebg-preview.png')
 
 st.image("assets/Untitled_design-6-removebg-preview-removebg-preview.png")
 
@@ -43,21 +43,6 @@ def add_bg_from_local(image_file):
 add_bg_from_local('assets/img1.wallspic.com-sky-water-blue-azure-watercolorpainting-4000x6000.jpg')
 
 
-
-
-# with st.sidebar.container():
-#     st.image("image/Artsy Fartsci.png")
-
-
-# st.image("assets/Untitled_design-6-removebg-preview-removebg-preview.png")
-
-
-# link css
-
-# with open('style.css') as f:
-#     st.markdown(f'<style>{f.read()}</style>',unsafe_allow_html=True)
-
-
 st.subheader('What does artsy fartsci do?')
 
 st.text(
@@ -70,4 +55,31 @@ st.text(
     '''
 )       
 
-st.image('assets/MAGIC-2-removebg-preview.png')
+st.subheader('Why choose us?')
+
+st.text( '''
+        If you are already a part of the artsy community or are looking
+        for some brilliant artworks, we can provide you with a fresh new 
+        set of images to complete your dreams of a home gallery or just a 
+        beautiful painting to hang in your corridor. With artsy-fartsci you 
+        can unlock your 'arts desire.
+        '''
+)
+
+st.subheader('How does our model work?')
+
+st.text( '''
+    Our model uses the most efficient machine learning technologies to
+    procure your five similar images. With 10000 images scraped from the
+    artsy API, equal parts prints, paintings, and drawings, we have trained our 
+    model using an autoencoder to identify multiple features that make 
+    up your image, and then produce five more. The process your image goes through 
+    once uploaded is that it is sent to our API which pre-processes 
+    and encodes your image to extrapolate the images features in a latent
+    space, and then computes the five nearest images based on these 
+    similar features. We then lay out these images for you below your input 
+    to allow you to see how similar the images are as well as giving you
+    information on the new similar images.
+      ''')
+
+st.image('assets/Screenshot_2023-09-06_at_10.54.26-removebg-preview.png', caption='Input Journey', width=700)
