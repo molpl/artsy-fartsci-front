@@ -25,6 +25,8 @@ def main():
     # # Set the title and header
     # st.title("Artsy-FartSci: A Data Science Project")
     st.header("Upload your image here")
+    
+    #st.write(st.secrets['bucket_name'])
 
     # Upload a user image
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
@@ -33,21 +35,26 @@ def main():
         st.image(uploaded_file, caption="Uploaded Image.", use_column_width=True)
 
     # Send the image to FastAPI endpoint for flipping
-        fastapi_url = "http://localhost:8000/top_5_similar"
-        files = {"image": uploaded_file}
-        response = requests.post(fastapi_url, files=files)
+        # fastapi_url = "http://localhost:8000/top_5_similar"
+        # files = {"image": uploaded_file}
+        # response = requests.post(fastapi_url, files=files)
 
-        if response.status_code == 200:
-            response_data = response.json()
-            st.success(response_data["top_5"])
-            images_to_display = []
-            for i in response_data['top_5']:
-                images_to_display.append(load_image_jpg(i))
-            image = Image.open(images_to_display[0])
-            st.image(image, caption='first image')
-
-        else:
-            st.error("An error occurred while processing the image.")
+        # if response.status_code == 200:
+        #     response_data = response.json()
+        #     st.success(response_data["top_5"])
+        #st.image(Image.open(load_image_jpg(1)))
+        images_to_display = []
+        #for i in response_data['top_5']:
+        for i in range(5):    
+            images_to_display.append(load_image_jpg(i))
+        image = Image.open(images_to_display[0])
+        st.image(image, caption='first image')
+        image = Image.open(images_to_display[1])
+        st.image(image, caption='second image')
+        image = Image.open(images_to_display[2])
+        st.image(image, caption='second image')
+    # else:
+    #     st.error("An error occurred while processing the image.")
 
 
 
