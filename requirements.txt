@@ -1,0 +1,14 @@
+streamlit
+numpy
+pandas
+streamlit_drawable_canvas
+base64
+requests
+PIL
+time
+io
+google-cloud-storage
+google-cloud-bigquery
+os
+google-oauth2
+json
