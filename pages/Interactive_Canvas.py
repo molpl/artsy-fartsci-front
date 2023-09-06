@@ -6,6 +6,9 @@ import base64
 import requests
 
 
+
+st.image("assets/Untitled_design-6-removebg-preview-removebg-preview.png")
+
 # comment
 def add_bg_from_local(image_file):
     with open(image_file, "rb") as image_file:
@@ -23,8 +26,6 @@ def add_bg_from_local(image_file):
     )
 
 add_bg_from_local('assets/img1.wallspic.com-sky-water-blue-azure-watercolorpainting-4000x6000.jpg')
-
-st.image("assets/Untitled_design-6-removebg-preview-removebg-preview.png")
 
 st.header('  On your marks, get set... paint!')
 
