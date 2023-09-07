@@ -3,7 +3,7 @@ numpy
 pandas
 streamlit_drawable_canvas
 requests
-PIL
+pillow
 time
 io
 google-cloud-storage
