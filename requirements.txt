@@ -5,4 +5,3 @@ google-cloud-storage
 google-cloud-bigquery
 google-auth
 google-oauth
-json
