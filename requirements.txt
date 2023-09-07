@@ -5,3 +5,4 @@ google-cloud-storage
 google-cloud-bigquery
 google-auth
 google-oauth
+db_dtypes
