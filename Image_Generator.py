@@ -6,11 +6,14 @@ import base64
 import time
 from google.cloud import storage
 from utils import load_image_jpg, load_image_data
+import os
 
 # Set the page title and icon
 st.set_page_config(
     page_title="Artsy-FartSci: A Data Science Project",
 )
+
+st.image("assets/Untitled_design-6-removebg-preview-removebg-preview.png")
 
 # Define a function to add a frame to an image
 def add_frame(image):
@@ -75,6 +78,7 @@ def main():
                     title = df[df['image_index'] == response_data["top_5"][i]].iloc[0,2]
                     image = Image.open(images_to_display[i])
                     st.image(image, caption=title)
+                    os.remove(images_to_display[i])
 
         else:
             st.error("An error occurred while processing the image.")
@@ -97,8 +101,6 @@ def add_bg_from_local(image_file):
     )
 
 add_bg_from_local('assets/img1.wallspic.com-sky-water-blue-azure-watercolorpainting-4000x6000.jpg')
-
-st.image("assets/Untitled_design-6-removebg-preview-removebg-preview.png")
 
 
 # Run the Streamlit app
