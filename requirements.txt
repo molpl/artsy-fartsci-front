@@ -2,7 +2,6 @@ streamlit
 numpy
 pandas
 streamlit_drawable_canvas
-base64
 requests
 PIL
 time
