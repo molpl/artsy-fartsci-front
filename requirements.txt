@@ -4,10 +4,8 @@ pandas
 streamlit_drawable_canvas
 requests
 pillow
-time
 io
 google-cloud-storage
 google-cloud-bigquery
-os
 google-oauth2
 json
