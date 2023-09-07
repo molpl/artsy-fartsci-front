@@ -33,7 +33,7 @@ def main():
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
 
     if uploaded_file:
-# Send the image to FastAPI endpoint for flipping
+        # Send the image to FastAPI endpoint for flipping
         fastapi_url = "https://artstyfartsci-5fhi7unvja-ew.a.run.app/top_5_similar"
         files = {"image": uploaded_file}
         response = requests.post(fastapi_url, files=files)

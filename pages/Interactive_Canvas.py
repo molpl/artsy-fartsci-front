@@ -4,8 +4,8 @@ from PIL import Image
 import pandas as pd
 import base64
 import requests
-
-
+from utils import load_image_jpg, load_image_data
+import time
 
 st.image("assets/Untitled_design-6-removebg-preview-removebg-preview.png")
 
@@ -55,8 +55,54 @@ canvas_result = st_canvas(
 
 
 if canvas_result.image_data is not None:
-    image=canvas_result.image_data
-    st.image(canvas_result.image_data)
+    drawing = Image.open(canvas_result.image_data)
+    # Send the image to FastAPI endpoint for flipping
+    fastapi_url = "https://artstyfartsci-5fhi7unvja-ew.a.run.app/top_5_similar"
+    files = {"image": drawing}
+    response = requests.post(fastapi_url, files=files)
+    #st.image(uploaded_file, caption="Uploaded Image.", use_column_width=True)
+    progress_text1 = ":rainbow[Going to Art School]"
+    progress_text2 = ":rainbow[Unpacking Paint and Brushes]"
+    progress_text3 = ":rainbow[Painting Your New Artistic World]"
+
+    my_bar = st.progress(0, text="loading")
+    for percent_complete in range(100):
+        time.sleep(0.5)
+        if percent_complete <= 30:
+            my_bar.progress(percent_complete + 1, text=progress_text1)
+
+        if percent_complete <= 65 and percent_complete > 30:
+            my_bar.progress(percent_complete + 1, text=progress_text2)
+
+        if percent_complete <= 100 and percent_complete > 65:
+            my_bar.progress(percent_complete + 1, text=progress_text3)
+
+    my_bar.empty()
+    #response_data = response.json()
+    #st.write(response.status_code)
+    if response.status_code == 200:
+        response_data = response.json()
+
+        images_to_display = []
+        for i in response_data['top_5']:
+            images_to_display.append(load_image_jpg(i))
+
+        col1, col2 = st.columns(2)
+        with col1:
+            st.image(drawing, caption="Your input.", use_column_width=True)
+
+        df = load_image_data(response_data["top_5"])
+
+        with col2:
+            for i in range(5):
+                title = df[df['image_index'] == response_data["top_5"][i]].iloc[0,2]
+                image = Image.open(images_to_display[i])
+                st.image(image, caption=title)
+
+    else:
+        st.error("An error occurred while processing the image.")
+        st.write(response.status_code)
+
 
 
 

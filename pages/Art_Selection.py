@@ -27,7 +27,7 @@ add_bg_from_local('assets/img1.wallspic.com-sky-water-blue-azure-watercolorpaint
 
 
 # Define the folder paths
-base_folder = "/Users/evejacob/code/Evej2000/artsy-fartsci/artsy-fartsci-front/"  # Replace with your folder path
+base_folder = os.path.join(os.path.dirname(__file__),'.')  # Replace with your folder path
 categories = ["modern_art", "impressionist", "renaissance"]
 
 # Create a Streamlit app
@@ -39,7 +39,7 @@ st.text('There are thousands of amazing pieces you can find but here are just a 
 selected_category = st.selectbox("SELECT ART CATEGORY", categories)
 
 # Get the list of image files in the selected category folder
-category_folder = os.path.join(base_folder, selected_category)
+category_folder = f'{selected_category}'#os.path.join(base_folder, selected_category)
 image_files = os.listdir(category_folder)
 
 # Randomly select two images from the folder
