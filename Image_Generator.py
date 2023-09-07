@@ -38,13 +38,13 @@ def main():
         files = {"image": uploaded_file}
         response = requests.post(fastapi_url, files=files)
         #st.image(uploaded_file, caption="Uploaded Image.", use_column_width=True)
-        progress_text1 = ":rainbow[Going to Art School]"
-        progress_text2 = ":rainbow[Unpacking Paint and Brushes]"
-        progress_text3 = ":rainbow[Painting Your New Artistic World]"
+        progress_text1 = ":blue[Going to Art School]:artist:"
+        progress_text2 = ":blue[Unpacking Paint and Brushes]:lower_left_paintbrush::art:"
+        progress_text3 = ":blue[Painting Your New Artistic World]:frame_with_picture:"
 
         my_bar = st.progress(0, text="loading")
         for percent_complete in range(100):
-            time.sleep(0.5)
+            time.sleep(1.2)
             if percent_complete <= 30:
                 my_bar.progress(percent_complete + 1, text=progress_text1)
 
