@@ -6,6 +6,8 @@ import base64
 import requests
 from utils import load_image_jpg, load_image_data
 import time
+import io
+import os
 
 st.image("assets/Untitled_design-6-removebg-preview-removebg-preview.png")
 
@@ -49,16 +51,19 @@ canvas_result = st_canvas(
     drawing_mode=drawing_mode,
     # point_display_radius= point_display_radius if drawing_mode == "point" else 0,
     display_toolbar=st.sidebar.checkbox("Display toolbar", True),
-    key="full_app",
+    key="png_export",
 )
 
 
 
-if canvas_result.image_data is not None:
-    drawing = Image.open(canvas_result.image_data)
+
+if st.button('Upload my image'):
+    drawing = Image.fromarray(canvas_result.image_data.astype("uint8"), mode="RGB")
+    buffered = io.BytesIO()
+    drawing.save(buffered, format="PNG")
     # Send the image to FastAPI endpoint for flipping
     fastapi_url = "https://artstyfartsci-5fhi7unvja-ew.a.run.app/top_5_similar"
-    files = {"image": drawing}
+    files = {"image": buffered.getvalue()}
     response = requests.post(fastapi_url, files=files)
     #st.image(uploaded_file, caption="Uploaded Image.", use_column_width=True)
     progress_text1 = ":rainbow[Going to Art School]"
@@ -89,7 +94,7 @@ if canvas_result.image_data is not None:
 
         col1, col2 = st.columns(2)
         with col1:
-            st.image(drawing, caption="Your input.", use_column_width=True)
+            st.image(canvas_result.image_data, caption="Your input.", use_column_width=True)
 
         df = load_image_data(response_data["top_5"])
 
@@ -98,6 +103,7 @@ if canvas_result.image_data is not None:
                 title = df[df['image_index'] == response_data["top_5"][i]].iloc[0,2]
                 image = Image.open(images_to_display[i])
                 st.image(image, caption=title)
+                os.remove(images_to_display[i])
 
     else:
         st.error("An error occurred while processing the image.")
